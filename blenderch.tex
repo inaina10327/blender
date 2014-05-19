@@ -1,0 +1,579 @@
+\documentclass[a4j, 10pt, landscape]{jarticle}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{setspace}
+%%% settings
+%% margins
+\setlength{\topmargin}{0mm} %上マージン　20mm
+\addtolength{\topmargin}{-1in} % 標準のマージン(1inch)を引く
+\setlength{\textheight}{185mm} %本文の長さ　(縦) 210-(10+10)= 190
+\setlength{\oddsidemargin}{15mm} % 奇数ページ　左マージン　10mm
+\addtolength{\oddsidemargin}{-1in} % 奇数ページ　標準のマージン(1inch)を引く
+\setlength{\evensidemargin}{15mm} % 偶数ページ　左マージン　10mm
+\addtolength{\evensidemargin}{-1in} % 偶数ページ　標準のマージン(1inch)を引く
+\setlength{\textwidth}{267mm} %本文の長さ(横) 297 -(20+20) = 257
+%\vspace{数値} \\
+\pagestyle{empty}
+\setstretch{0.67}
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{0pt}%
+{2ex \@plus .5ex \@minus .2ex}%
+{1ex \@plus.2ex}%
+{\normalfont\large\bfseries}}
+\makeatother
+% \newcommand{\mysection}[1]{\vspace{-20pt}\section*{#1}\vspace{-5pt}}
+\newcommand{\mysection}[1]{ \section*{#1} }
+\newcommand{\minisection}[1]{ \subsubsection*{#1} }
+
+%%% fonts
+\font\smallrm=cmr8
+
+%%% defs
+\def\cm#1#2{{\tt{#1}} \dotfill {#2} \par }
+\def\cn#1{\hfill$\lfloor$ #1\par}% とりあえずコピー。要変更
+\def\strong{\bf}
+\def\mode#1{{\strong [#1]}}
+\def\tom#1{$\to$\mode{#1}}
+\def\inm#1{\mode{#1}:}
+\def\key#1{$\langle${\rm{\it#1\/}}$\rangle$}
+%38-47まで、大体ただ文字が出るだけの命令
+\def\rapos{\char125}%{
+\def\lapos{\char123}%}
+\def\tild{\char126}%~
+\def\lbracket{[}%[
+\def\rbracket{]}%]
+\def\bs{$\backslash$}%ばっくすらっしゅ
+\def\backspace{$\leftarrow$}%左やじるし
+\def\enter{$\hookleftarrow$}%エンターみたいなやじるし
+% \def\ctrl{{\rm\char94}\kern-1pt}
+\def\ctrl{Ctrl-}%こんとろーる
+\def\shift{Shift-}
+\def\alt{Alt-}
+
+\def\or{\thinspace{\tiny{or}}\thinspace}
+
+\begin{document}
+\begin{multicols}{2}
+%\title{VIM QUICK REGERENCE}
+%
+%\cm{:viusage }{全コマンドの概要を表示}
+\mysection{3DView}
+3Dオブジェクトが配置されている様子がわかる。
+\minisection{ウィンドウ設定}
+\cm{\shift F5}{ウインドウの表示}
+\cm{ウィンドウの境界で左ドラッグ}{ウィンドウサイズの変更}
+\cm{ヘッダの境界で左ドラッグ}{ヘッダの非表示}
+\cm{右下(左上)の+マークを左クリック}{ヘッダの再表示}
+\cm{ヘッダにカーソルを置く $\to$ F5}{ヘッダの位置のトップ/ボトム切り替え}
+\cm{三角形状の斜線をウィンドウの内側へ左ドラッグ}{ウィンドウの分割することができる。(構造上可能な場合に限る)}
+\cm{三角形状の斜線をウィンドウの外側へ左ドラッグ}{ウィンドウの結合(重なったウィンドウを消去)することができる。(構造上可能な場合に限る)}
+\cm{ウィンドウとウィンドウの境界で右クリック}{分割と結合が選択できる}
+\cm{\shift 三角形状の斜線を左ドラッグ}{別ウィンドウへの分離}
+\cm{ウィンドウのヘッダの一番左を左クリック}{ウィンドウタイプの変更}
+\cm{\ctrl [→][←]}{画面構成の変更}
+\cm{T}{ツールバーの表示}
+\cm{N}{プロパティバーの表示}
+\cm{\ctrl ↑ or \ctrl ↓ or \shift space}{アクティブなウィンドウの全面化/解除}
+\cm{\alt F11}{Blender自体のフルスクリーン化/解除}
+
+\minisection{視点操作}
+3DViewウィンドウヘッダーメニュー【ビュー/View】でも操作可能
+\cm{中ドラッグ}{回転}
+\cm{\shift 中ドラッグ}{水平移動}
+\cm{ホイール or \ctrl 中ドラッグ}{ズーム}
+\cm{テンキー[1]}{フロントビュー}
+\cm{テンキー[3]}{サイドビュー}
+\cm{テンキー[7]}{トップビュー}
+\cm{\ctrl テンキー[1][3][7]}{それぞれの逆からの視点}
+\cm{テンキー[0]}{カメラビュー}
+\cm{テンキー[.]}{選択中のオブジェクトへズーム}
+\cm{「HOME」キー}{全体を表示}
+\cm{テンキー[5]}{透視投影/正射影の切り替え}
+\cm{テンキー[/]}{ローカルビュー}
+\cm{テンキー[2][4][6][8]}{下、左、右、うえへ15度回転}
+\cm{\ctrl テンキー[2][4][6][8]}{下、左、右、上へバン}
+\cm{テンキー[+]}{ズームイン}
+\cm{テンキー[-]}{ズームアウト}
+\cm{\shift ホイール回転}{上下へバン}
+\cm{\ctrl ホイール回転}{左右へバン}
+\cm{\shift \alt ホイール回転}{上下へ回転}
+\cm{\ctrl \alt テンキー[.]}{左右へ回転}
+\cm{\ctrl テンキー[.]}{3Dカーソルへズーム}
+\cm{\shift B}{矩形を描いた場所へズーム}
+\cm{\shift テンキー[Enter]}{カメラビュー時、サイズを1:1にする。}
+\cm{\shift F}{フライナビゲーション}
+\cm{\ctrl \alt Q}{四画面分割}
+\cm{Z}{ソリッドとワイヤーフレームの切り替え}
+\cm{\alt}{ソリッドとテクスチャまたはGLSLの切り替え}
+
+\mysection{3DViewでのオブジェクト操作}
+\minisection{操作関係}
+\cm{右クリック}{選択}
+\cm{A}{全選択/全選択解除}
+\cm{G}{移動}
+\cm{S}{拡大・縮小}
+\cm{R}{回転}
+\cm{R $\to$ R}{3軸回転}
+
+\minisection{操作軸関係}
+\cm{右ドラック}{}
+\cm{X}{X方向に操作を限定}
+\cm{Y}{Y方向に操作を限定}
+\cm{Z}{Z方向に操作を限定}
+
+\minisection{量制御}
+\cm{\shift マウス移動}{細かく操作}
+\cm{\ctrl マウス移動}{一定量毎の操作}
+\cm{テンキーでの数字入力 (操作中)}{操作量を数値で指定}
+
+\minisection{操作の確定/キャンセル}
+\cm{左クリック/Enter}{操作を確定}
+\cm{右クリック}{操作をキャンセル}
+\cm{\alt G S R}{それぞれの操作をリセット}
+\cm{\shift A}{オブジェクトの追加}
+\cm{F6 (オブジェクトの追加後)}{オブジェクトの仕様設定}
+\cm{X or Delete (オブジェクト選択後)}{オブジェクトの削除}
+\cm{\shift D (オブジェクト選択後)}{オブジェクトの複製}
+\cm{\shift 複数のオブジェクト選択}{オブジェクトの複数選択}
+\cm{\ctrl J}{オブジェクトの結合}
+\cm{オブジェクトを選択 $\to$ Tab}{編集モード(デフォルトでは頂点/Vertex編集モード)/オブジェクトモードの切り替え}
+
+\cm{\ctrl Tab (編集モード時)}{編集するものの変更(頂点/辺/面)}
+\cm{\shift メッシュセレクトモード選択ボタンを左クリック}{複数の同時表示}
+
+\minisection{マニピュレータによる操作}
+\cm{\ctrl space}{マニピュレータの表示}
+\cm{\shift マニピュレータ表示ボタン左クリック}{マニピュレータの複数表示}
+\cm{左ドラッグ}{マニピュレータの操作}
+\cm{\shift 左ドラッグ}{掴んだ軸以外の2軸に限定した操作}
+\cm{操作中に \shift や \ctrl の長押し}{移動量の変更}
+\cm{操作中に数値入力}{操作量の変更}
+\cm{中クリック}{操作軸の変更}
+\cm{左マウスボタンを離す or Enter}{操作の確定}
+\cm{右クリック}{操作をキャンセル}
+
+\minisection{プロパティバーによる操作}
+オブジェクトの位置、角度、大きさをXYZ軸別に数値で指定できる。
+
+\cm{N}{プロパティバーの表示}
+
+\minisection{ツールバーによる操作}
+オブジェクトの変形ができる。
+
+\cm{t}{ツールバーの表示}
+
+\minisection{3Dカーソル}
+赤と白のストライプで描かれたリング状のアイコンのことを3Dカーソルという。オブジェクトの追加時や操作時の基準として機能する。プロパティバーで数値入力による操作ができる。
+
+\cm{左クリック(3DView上で)}{移動}
+
+
+
+
+\minisection{編集モード独自の操作}
+\cm{E}{領域で押し出し/Extrude:選択した頂点、辺、面を押し出す。}
+\cm{\alt E}{押し出しメニュー:各面ごとに押し出し(individual)など、特殊な押し出しを選択できる。}
+\cm{\ctrl R}{ループカット:ループ状に切れ込みを入れる。マウスホイールで分割数を変更できる。}
+\cm{K + 左ドラッグ}{ナイフカット:投げ縄選択で選択面に切れ込みを入れる。}
+\cm{P}{別オブジェクトに分離:選択した場所、マテリアル別、接続面別で別オブジェクトへ切り離すことができる。}
+\cm{\alt M}{結合:複数選択した頂点(Vertex)を１つに統合する。}
+\cm{\ctrl N}{法線を一様にする:選択した面を同じ方向(外側)に向ける。}
+\cm{F}{辺/面作成:3つ、または4つ選択された頂点(Vertex)の内側に面を貼ったり、選択された2つの頂点(Vertex)に辺を作成する。}
+\cm{Y}{分離:選択した要素を分離する。}
+\cm{V}{切り裂き:選択した頂点(Vertex)、辺(Edge)の位置で面(Face)を切り裂く。}
+\cm{\ctrl T}{四角面を三角面に:選択した四角面を三角面に分割する。}
+\cm{\alt J}{三角面を四角面に:選択した2の三角面を四角面に統合する。}
+\cm{\alt S}{収縮/膨張:選択した要素を法線方向へ移動する。}
+\cm{\ctrl 左クリック}{3Dカーソルの位置に複製/押し出し:デフォルトでは頂点を追加し、頂点を選択した状態では頂点を、辺を選択した状態では辺を、面を選択した状態では面を押し出すように追加する。}
+\cm{W}{Specialメニュー:さまざまな編集を行うメニューを表示する。}
+
+\cm{\shift \ctrl \alt C}{原点の位置の調節}
+\cm{H}{選択中の要素の非表示(ヒドゥン)}
+\cm{\alt H}{非表示中の要素すべてを再表示}
+\cm{長押し \shift 右クリック}{アクティブ要素の除外}
+
+
+
+\minisection{オブジェクトのさまざまな選択方法}
+\cm{右クリック}{選択}
+\cm{A}{全選択/全選択解除}
+\cm{\shift 右クリック}{追加選択}
+\cm{B (左ドラッグで選択、中ドラッグで除外)}{範囲選択}
+\cm{C (左ドラッグで選択、中ドラッグで除外、右クリックで解除)}{円選択}
+\cm{\ctrl 左ドラッグ}{投げ縄選択}
+\cm{\ctrl l}{選択範囲反転}
+\cm{\shift G}{関係で選択}
+\cm{\shift L}{リンクで選択}
+\cm{\ctrl テンキー[+] (編集モードのみ)}{選択範囲拡張}
+\cm{\ctrl テンキー[-] (編集モードのみ)}{選択範囲縮小}
+\cm{\alt 右クリック (編集モードのみ)}{ライン選択}
+\cm{\ctrl \alt 右クリック (編集モードのみ)}{帯選択}
+\cm{L (編集モードのみ)}{接続面選択}
+\cm{\shift L (編集モードのみ)}{接続面選択解除}
+
+\minisection{プロポーショナル編集}
+\cm{O}{プロポーショナルモードの有効/無効}
+\cm{O (編集モード時)}{アイコンをプルダウンメニューに変化}
+\cm{\alt O}{非接続面にも影響するかどうかを選択}
+\cm{ホイール}{}
+\cm{PageUp/PageDown (変形中)}{影響範囲の変更}
+\cm{ホイール (変形中)}{影響範囲の変更}
+
+%\minisection{ピボットポイント}
+
+\mysection{Timeline}
+アニメーションを作る際に時間を表示、制御する。
+
+\mysection{GraphEditor}
+アニメーションの動きをグラフで制御する。
+
+\cm{$\shift F6$}{ウインドウの表示}
+
+\mysection{DopeSheet}
+アニメーションの動きをキーフレームで制御する。
+
+\cm{$\shift F12$}{ウインドウの表示}
+
+
+\mysection{NLA Editor}
+アニメーションの動きをストリップで制御する。
+
+\mysection{UV/ImageEditor}
+UV、テクスチャを編集したり、レンダリング結果を表示する。
+
+\cm{$\shift F10$}{ウインドウの表示}
+
+
+\mysection{VideoSequenceEditor}
+動画のコンポジットを行う。
+
+\cm{$\shift F8$}{ウインドウの表示}
+
+\mysection{TextEditor}
+スクリプトを記述、実行する。メモとしてテキストを打ち込むこともできる。
+
+\cm{$\shift F11$}{ウインドウの表示}
+
+\mysection{NodeEditor}
+ノードを編集する。
+
+\cm{$\shift F3$}{ウインドウの表示}
+
+\mysection{LogicEditor}
+ゲームエンジンを使用する際に挙動を制御する。
+
+\cm{$\shift F2$}{ウインドウの表示}
+
+\mysection{Properties}
+すべての要素のパラメータを制御する入力フォーム、ボタン群などがすべてまとめられている。
+
+\cm{$\shift F7$}{ウインドウの表示}
+
+\mysection{Outliner}
+オブジェクトやマテリアルなど、シーン内の要素がすべて階層化されている。
+
+\cm{$\shift F9$}{ウインドウの表示}
+
+\mysection{UserPreferences}
+環境設定を行う。
+\cm{$\ctrl\alt U$}{フローティングウインドウの表示}
+
+
+
+\mysection{into}
+ファイル管理やヘルプなど、いわゆる一般的なアプリケーションのヘッダにあるメニューに近いもの。
+
+\mysection{FileBrowser}
+ファイル管理を行う。
+
+\cm{$\shift F1$}{ウインドウの表示}
+
+
+\mysection{PythonConsole}
+Blenderに内蔵されたPythonコンソールにアクセスする。
+
+\cm{$\shift F4$}{ウインドウの表示}
+
+
+\mysection{UserPreferences}
+
+\mysection{Timeline}
+\cm{h l k j }{左右上下の文字}
+\cm{g$[$h j$]$ }{表示業の上下}
+%\cm{$n_{opt}$b $n_{opt}$w }{$n$ 個前後の単語頭}
+\cm{b w }{前後の単語頭}
+\cm{B W }{スペースで区切られた単語}
+%\cm{$n_{opt}$ge $n_{opt}$e }{$n$ 個前後の単語の終わり}
+\cm{ge e }{前後の単語の終わり}
+\cm{gE E }{スペースで区切られた単語の終わり}
+\cm{\lapos\ \rapos }{前後の段落の先頭、週末}
+\cm{( ) }{前後の文の先頭}
+\cm{0 \^\ \$ }{行頭、行の最初の文字、行末}
+\cm{g0 gm }{画面内の頭、中央}
+\cm{g\^\ g\$ }{画面内の最初・最後の文字}
+\cm{$n$G $n$gg }{$n$行目}
+\cm{gg G}{ファイル最初・最後の行}
+\cm{$n|$ }{現在の行の$n$文字目}
+\cm{\% }{対括弧}
+\cm{- + }{前後の行の最初の文字}
+\cm{f$c$ F$c$ }{前後の$c$}
+\cm{t$c$ T$c$ }{前後の$c$の左・右}
+
+\mysection{GraphEditor}
+\cm{i a }{カーソルの前・後\tom{挿入}}
+\cm{I A }{論理行先頭・行末\tom{挿入}}
+\cm{gI }{物理行先頭\tom{挿入}}
+\cm{o O }{現在行の前後に行を作成\tom{挿入}}
+\cm{r$c$ }{カーソルの下の文字を$c$で置き換える}
+\cm{gr$c$ }{レイアウトを変更せずに置換}
+\cm{R }{置換モード}
+\cm{gR }{レイアウトを変更しない置換モード}
+\cm{c$m$ }{$m$の範囲削除\tom{挿入}}
+%\cm{cc S }{現在行削除→挿入モード}
+\cm{cc C }{現在行削除\tom{挿入}} %ユーザー設定
+%\cm{c\$ C }{現在文字以降削除→挿入モード}
+%\cm{c\$ }{現在文字以降削除→挿入モード} %ユーザー設定
+
+\mysection{削除操作}
+\cm{x X }{カーソルの下、前を削除}
+\cm{d$m$ }{$m$の範囲の文字を削除}
+\cm{dd D }{現在行を削除}
+\cm{J gJ }{次に行を行末に連結（空白無しで）}
+\cm{:$n$d } {$n$行目を削除}
+\cm{:$n$d$x$ } {$n$行目を削除し$x$レジスタに格納}
+
+\mysection{挿入モード}
+\cm{\ctrl V$c$ }{$c$ を挿入}
+\cm{\ctrl V$n$ }{10進3桁文字コードが$n$の文字を挿入}
+\cm{\ctrl A }{直前に挿入した文字を挿入}
+\cm{\ctrl @ }{{\tt\ctrl A}して挿入モードを抜ける}
+\cm{\ctrl R$x$ }{$x$レジスタの内容を挿入}
+\cm{\ctrl R\ctrl R$x$}{レジスタの内容をそのまま挿入}
+\cm{\ctrl N \ctrl P }{前後の補完候補}
+\cm{\ctrl W }{カーソル直前の単語を削除}
+\cm{\ctrl U }{カーソル前のすべてを削除}
+\cm{\ctrl T \ctrl D }{一段インデント・削除}
+\cm{\ctrl K$c_1$ $c_2$ }{$\{c_1,c_2\}$ のダイグラフを挿入}
+\cm{\ctrl O$o_{nomal}$ }{コマンドを実行}
+\cm{\ctrl X$\to$\ctrl Y}{一行上スクロール}
+\cm{\ctrl X$\to$\ctrl E}{一行下スクロール}
+\cm{\key{esc} \or \ctrl \lbracket}{通常モードへ移行}
+
+\mysection{検索 \& 置換}
+\cm{/$s$\enter\ ?$s$\enter }{文字列$s$を下方・上方検索}
+%\cm{/$s$/$o$\enter\ ?$s$?$o$\enter }{文字列$s$検索し、$o$だけ移動}
+\cm{n\or N}{直前の検索の順方向・逆方向繰り返し}
+\cm{/\enter \or ?\enter }{直前の検索の下方・上方繰り返し}
+\cm{* \# }{カーソル下の単語を下方・上方完全一致検索}
+\cm{g* g\# }{カーソル下の単語を下方・上方検索}
+\cm{gd gD }{ローカル・グローバル変数定義を検索}
+\cm{:$r$s/$s_1$/$s_2$/$o_{opt}$ } {$r$の範囲の$s_1$を$s_2$で置換}
+\cn{$o:$ {\tt g}---全て, {\tt c}---確認}
+\cm{:s\enter S }{同じ条件で置換} %ユーザー設定
+\cm{:$r$s $o$ } {新しい$r$,$o$で置換を実行}
+%\cm{:$r$g/$p$/$c$ } {$c$を$r$の範囲の$p$にマッチした行で実行}% Exコマンド？
+
+\mysection{ビジュアルモード}
+\cm{v V \ctrl V }{文字・行・矩形選択開始・終了}
+\cm{o }{選択保持して逆端へ}
+\cm{gv }{直前の選択を再開}
+%\cm{aw as ap }{単語・文・ブロックを選択}
+%\cm{ab aB }{( )や{\tt\lapos} {\tt\rapos}で囲まれたブロックを選択}
+%\cm{a$[$\lbracket\rbracket\lapos\rapos (){\tt"'`}<>$]$}{それぞれで囲まれたブロックの選択}
+%\cm{ib iB }{( )や{\tt\lapos} {\tt\rapos}で囲まれたブロックの内側を選択}
+%\cm{i$[$\lbracket\rbracket\lapos\rapos (){\tt"'`}<>$]$}{それぞれで囲まれたブロックの内側を選択}
+%\cm{at it}{タグに囲まれた部分(の内側)を選択}
+\cm{$[$a i$]$ $o$ }{テキストオブジェクト・その内側}
+\cn{$o_1:$ {\tt w s p t}---単語、文、段落、タグ}
+\cn{$o_2:$ {\tt ()\lapos\rapos\lbracket\rbracket<>"'`}---それぞれの内側}
+\cm{$n$> $n$< }{$n$段インデント・逆インデント}% =はフィルタ？
+\cm{= }{インデント矯正}
+
+\mysection{UnDo, ReDo \& レジスタ}
+\cm{u U }{一つUnDo・行単位でUnDo}
+\cm{\ctrl R }{ReDo}
+\cm{$n_{opt}$.\ }{最後の変更を$n$回繰り返し}
+\cm{q$x$ q$X$ }{$x$レジスタに記録・追記}
+\cm{q }{レジスタへの記録を終了}
+\cm{@$x$ }{$x$レジスタの内容を実行}
+\cm{@@ }{直前の{\tt @}を再実行}
+\cm{:@$x$ } {$x$レジスタの内容をExコマンドとして実行}
+
+\mysection{コピー}
+\cm{"$x$ }{次の削除・コピー・貼付に$x$レジスタを使う}
+\cm{:reg $x_{opt}$ } {$x$レジスタの内容を表示}
+\cm{y$m$ }{$m$の範囲をコピー}
+\cm{yy Y }{現在行をコピーしてレジスタへ格納}
+\cm{p P }{カーソルの後・前に貼付}
+\cm{\rbracket p \lbracket p }{現在行にあわせてインデントした{\tt p}・{\tt P}}
+\cm{gp gP }{カーソルを最後に移動する{\tt p}・{\tt P}}
+
+%\mysection{パターン(Perlとの違い)}
+%\cm{:help pattern } {パターンのヘルプを表示}
+%\cm{\bs$<$ \bs$>$ }{単語の始まりと終わり}
+%\cm{\bs i \bs k \bs I \bs K }{an identifier, keyword; excl. digits}
+%%\cm{\bs f \bs p \bs F \bs P }{a file name, printable char.; excl. digits}
+%\cm{\bs e \bs t \bs r \bs b }{\key{esc}, \key{tab}, \key{\enter}, \key{$\gets$}}
+%\cm{\bs = * \bs + }{0縲鰀1回、0回以上、1回以上のマッチ}
+%\cm{\bs$\{n,m\}$ }{$n$回縲鰀$m$回の繰り返しにマッチ}
+%\cm{\bs$\{-\}$ }{最小マッチ}
+%\cm{\bs$|$ }{{\it or\/}分割}
+%\cm{\bs( \bs) }{マッチのグループ化}
+%\cm{\bs \& \bs{}1 }{1番目のマッチ文字列を参照}
+%\cm{\bs u \bs l }{大文字・小文字}
+%\cm{\bs c \bs C }{ignore, match case on next pattern}
+%\cm{\bs \%x }{16進数字にマッチ}
+%\cm{\bs @= \bs @! }{肯定・否定先読み}
+%%\cm{\bs @= \bs @! }{\tt (?=pattern) (?!pattern)\rm}
+%\cm{\bs @$<$= \bs @$<$! }{肯定・否定後読み}
+%%\cm{\bs @$<$= \bs @$<$! }{\tt (?$<$=pattern) (?$<$!pattern)\rm}
+%\cm{\bs @$>$ }{バックトラック禁止}
+%%\cm{\bs @$>$ }{\tt (?$>$pattern)\rm }
+%\cm{\bs\_\^{} \bs\_\$ }{行頭・行末(パターンのどこでも)}
+%\cm{\bs\_. }{行末文字を含む任意の位置文字}
+%%\cm{\bs zs \bs ze }{set start/end of pattern}
+%%\cm{\bs \%\^{} \bs\%\$ }{行頭・行末にマッチ}
+%%\cm{\bs\%{}V }{match inside visual area}
+%%\cm{\bs\tt'\rm m }{match with position of mark m}
+%%\cm{\bs\%(\bs) }{unnamed grouping}
+%%\cm{\bs\_$[$ $]$ }{collection with end-of-line included}
+%%\cm{\bs\%$[$ $]$ }{sequence of optionally matched atoms}
+%%\cm{\bs{}v }{very magic: patterns almost like perl}
+
+%\mysection{スペルチェック}
+%\cm{:set spell spelllang=de\_20 } {スペルチェックの設定}
+%\cm{$]$s }{次のスペルチェック単語}
+%\cm{zg zG }{カーソル下の単語を(internal-wordlistに)グッドワードとして追加 }
+%\cm{zw zW }{mark bad word (to internal word list)}
+%\cm{z= }{suggest corrections}
+
+%\mysection{Marks, Motions, and Tags}
+\mysection{マーカー・タグジャンプ}
+\cm{m$c$ }{現在の場所を $c\in[a..Z]$にマーク}
+\cm{`$c$ `$C$ }{現在のファイルの $c$ 、全ファイルの$C$ に移動}
+%\cm{`$0..9$ }{go to last exit position} %設定ファイルで何を保存するのか決められるらしい。そのため非表示にした
+\cm{`\/` }{ジャンプ直前の場所へ移動}
+\cm{`\/" }{最後に終了した位置}
+\cm{`[ `] }{直前に変更した箇所の最初・最後}
+\cm{:delm $c_{opt}$ }{$c$ に対応するマークを削除}
+\cm{:marks } {マークを表示}
+\cm{:jumps } {ジャンプリストを表示} %ここでいいのか？
+\cm{$n_{opt}$\ctrl O }{$n$ 個古いカーソル位置へ移動}
+\cm{$n_{opt}$\ctrl I }{$n$ 個新しいカーソル位置へ移動}
+%\cm{\ctrl ] \ctrl T }{jump to the tag under cursor, return from tag}
+%\cm{:ts $t$ } {list matching tags and select one for jump}%タグリストの表示となにか
+%\cm{:tj $t$ } {jump to tag or select one if multiple matches}%タグがひとつだけマッチしたなら移動
+%\cm{:tags } {タグリストの表示}
+
+\mysection{複数ファイル・バッファ}
+\cm{:tab ball }{バッファタブリスト表示}
+\cm{:buffers \or :files \or :ls }{バッファリストを表示}
+\cm{:buffer $n$ }{$n$ 番のバッファを編集}
+\cm{:badd $f$ }{新しいバッファに$f$を読み込み}
+\cm{:bdelete $n$ }{バッファ番号 $n$ を削除}
+\cm{:bdelete $f$ }{バッファ名 $f$ を削除}
+\cm{:bn$[$ext$]$ :bp$[$revious$]$ }{前後のバッファに移動}
+\cm{:bf$[$irst$]$ :bl$[$ast$]$ }{最初・最後のバッファ}
+
+\mysection{スクロール \& マルチウィンドウ}
+\cm{\ctrl D \ctrl U }{半画面上下スクロール}
+\cm{\ctrl F \ctrl B }{一画面スクロール}
+\cm{zt zz zb }{現在行を画面上・中央・下へスクロール}
+\cm{zh zl }{一文字右左スクロール}
+\cm{zH zL }{一画面右左スクロール}
+\cm{:split :vsplit } {垂直二画面分割}
+\cm{:new :vnew } {新規垂直分割ウィンドウ}
+\cm{:on } {カレントウィンドウ以外を閉じる}
+\cm{\ctrl W$[$hjkl$]$ }{ウィンドウ移動}
+\cm{\ctrl Ww \ctrl W\ctrl W }{次・前のウィンドウに移動}
+\cm{\ctrl W$n_{opt}$+ \ctrl W$n_{opt}$- }{$n$行拡大・縮小}
+\cm{\ctrl W$n>_{opt}$ \ctrl W$n<_{opt}$ }{$n$文字幅拡大・縮小}
+
+\mysection{Exコマンド(\enter)}
+\cm{:help holy-grail }{すべてのExコマンドを表示}
+\cm{:e $f$ }{$f$ を編集}
+\cm{:w }{上書き保存}
+\cm{:$r$w $f$ }{$r$ を $f$ に保存}
+\cm{:$r$w$>$\kern-3pt$>$ $f$ }{$r$ を $f$ に追加}
+\cm{:q :q! }{カレントウィンドウを終了}
+\cm{:wq\or :x\or ZZ }{保存して終了}
+\cm{:r $f$ }{カーソルの後ろに $f$ を挿入}
+\cm{:r!\ $c$ }{カーソルの後ろに $c$ の実行結果を挿入}
+\cm{:$r_{opt}$c\ $s$ }{行単位で置換(.のみの行で終了)}
+\cm{:$r_{opt}$m\ $n$ }{$r$ 行を、  $n$ 行目の下に移動する}
+
+%\mysection{Ex Ranges}
+%\cm{, ;\ }{separates two lines numbers, set to first line }
+%\cm{$n$ }{an absolute line number $n$}
+%\cm{.\thinspace\thinspace\thinspace\$ }{the current line, the last line in file}
+%\cm{\% * }{entire file, visual area}
+%\cm{'$t$ }{position of mark $t$}
+%\cm{/$p$/ ?$p$? }{the next, previous line where $p$ matches}
+%\cm{+$n$ -$n$ }{$+n$, $-n$ to the preceding line number}
+
+%ネオコン導入したため削除
+%\mysection{補完}
+%\cm{\ctrl X\ctrl N \ctrl X\ctrl P}{次・前の候補}
+%\cm{\ctrl{}X\ctrl{}L}{行補完}
+%\cm{\ctrl{}X\ctrl{}I}{カレントファイルと取り込みファイルからキーワード補完}
+%\cm{\ctrl{}X\ctrl{}K}{辞書から補完}
+%\cm{\ctrl{}X\ctrl{}]}{タグ}
+%\cm{\ctrl{}X\ctrl{}F}{ファイル名}
+%\cm{\ctrl{}X\ctrl{}D}{定義とマクロ}
+%\cm{\ctrl{}X\ctrl{}V}{vimコマンドラインと同等}
+%\cm{\ctrl{}X\ctrl{}U}{ユーザー定義}
+%\cm{\ctrl{}X\ctrl{}O}{オムニ}
+
+\mysection{折畳み}
+\cm{:set fdm=indent } {indent-foldmethod}
+\cm{zf$m$ }{$m$の範囲で折りたたみ作成}
+\cm{:$r$fo }{$r$の範囲で折りたたみ作成}
+\cm{zd zE }{折畳みをひとつ・全て削除する}
+\cm{zo zc zO zC }{（再帰的に） 開く・閉じる}
+\cm{[z ]z }{move to start, end of current open fold}
+\cm{zj zk }{前後の折りたたみの端に移動する}
+\cm{zr zR }{'foldlevel'をひとつ上げる・最大にする}
+\cm{zm zM }{'foldlevel'をひとつ下げる・0にする}
+\cm{zn zN zi }{'foldenable'のオフ・オン・切り替え}
+\cm{:set foldcolumn=4 } {show foldcolumn}
+
+\mysection{コンパイル}
+\cm{:compiler $c$ }{指定したコンパイラの設定をする}
+\cm{:make } {{\tt makeprg} を実行してエラーを解釈}
+\cm{:cope } {クイックフィックスナビ}
+\cm{:cn :cp } {次・前のエラーに移動}
+\cm{:cl } {すべてのエラーを表示}
+\cm{:cf } {エラーファイルを読み込む}
+
+%\mysection{Standard Mode Formatting/Filtering}
+%$m$:ビジュアルモードコマンド\par
+%\cm{gq$m$ gqgq }{format movement $m$/current paragraph}%テキスト整形らしい
+%\cm{:$r$ce $w_{opt}$ } {$r$の範囲を$w$文字で中央揃え}
+%\cm{:$r$ri $w_{opt}$ } {$r$の範囲を$w$文字で右揃え}
+%\cm{:$r$le $i_{opt}$ } {$r$の範囲を$i$文字タブで左揃え}
+%\cm{!$m$$c$\enter }{filter lines of movement $m$ through command $c$}
+%\cm{$n_{opt}$!!$c$\enter }{$n$行目を$c$でフィルタ}
+%\cm{:$r$!$c$ } {$r$の範囲の行を$c$でフィルタ}
+%\cm{$n_{opt}$\tild }{$n$文字を大文字小文字切り替え}
+%\cm{g\tild{$m$} gu$m$ gU$m$ }{$m$の範囲を大文字小文字切り替え・小文字・大文字}%要整形
+%\cm{$<$$m$ $>$$m$ }{shift left, right text of movement $m$}%インデント
+%\cm{$n$$<$\kern-3pt$<$ $n$$>$\kern-3pt$>$ }{$n$行インデント}
+%\cm{\ctrl A \ctrl X}{カーソル下の数を増分・減分}
+
+%\mysection{Miscellaneous}
+%\cm{:sh :!$c$ } {start shell, execute command $c$ in shell}
+%\cm{K }{run {\tt keywordprg} (man) on word under cursor}
+%\cm{\ctrl L }{redraw screen}
+%\cm{\ctrl G }{show cursor column, line, and character position}
+%\cm{:set cuc } {show cursor column visually}
+%\cm{ga }{show A{\smallrm SCII} value of character under cursor}
+%\cm{gf }{open file which filename is under cursor}
+%\cm{:mkview $[f]$ :loadview $[f]$ }{save/load configuration}
+%\cm{:set ff=dos } {convert file to dos eol format} 
+%\cm{:e ++ff=unix } {reopen file in unix eol format}
+%\cm{:set hlsearch } {highlight searches}
+%\cm{:$r$hardcopy > file.ps }{print range to ps file}
+%\cm{:set list }{show listchar characters (tabs etc.)}
+
+\end{multicols}
+\end{document}
